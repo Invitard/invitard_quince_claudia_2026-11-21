@@ -1,0 +1,174 @@
+---
+// FloralDecor.astro
+interface Props {
+	variant?: "header-arch" | "tiara" | "divider" | "left-garland-1" | "left-garland-2" | "right-garland-1" | "right-garland-2";
+	className?: string;
+}
+
+const { variant = "header-arch", className = "" } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+{variant === "header-arch" && (
+	<div class={`roses-header-arch-container ${className}`}>
+		<img
+			src={`${base}/img/elements/roses_arch.webp`}
+			alt="Arreglo floral de rosas para el encabezado"
+			class="roses-arch-img"
+			loading="eager"
+		/>
+	</div>
+)}
+
+{variant === "tiara" && (
+	<div class="tiara-container">
+		<svg viewBox="0 0 100 45" width="64" height="28" fill="none" stroke="currentColor">
+			<path d="M50 5 L55 22 L68 12 L65 28 L82 18 L76 35 L50 38 L24 35 L18 18 L35 28 L32 12 L45 22 Z" fill="url(#goldGradTiara)" stroke="#c59737" stroke-width="0.8"/>
+			<circle cx="50" cy="5" r="2.5" fill="#fce4a6"/>
+			<circle cx="68" cy="12" r="2" fill="#fce4a6"/>
+			<circle cx="32" cy="12" r="2" fill="#fce4a6"/>
+			<circle cx="82" cy="18" r="1.8" fill="#fce4a6"/>
+			<circle cx="18" cy="18" r="1.8" fill="#fce4a6"/>
+			<circle cx="50" cy="28" r="2" fill="#c8a4c8"/>
+			<defs>
+				<linearGradient id="goldGradTiara" x1="0%" y1="0%" x2="100%" y2="100%">
+					<stop offset="0%" stop-color="#d4af37"/>
+					<stop offset="50%" stop-color="#fae29c"/>
+					<stop offset="100%" stop-color="#b88628"/>
+				</linearGradient>
+			</defs>
+		</svg>
+	</div>
+)}
+
+{variant === "left-garland-1" && (
+	<div class={`roses-side-wrapper left-garland-1 ${className}`}>
+		<img
+			src={`${base}/img/elements/roses_left_01.webp`}
+			alt="Guirnalda lateral izquierda"
+			class="rose-garland-img"
+			loading="lazy"
+		/>
+	</div>
+)}
+
+{variant === "left-garland-2" && (
+	<div class={`roses-side-wrapper left-garland-2 ${className}`}>
+		<img
+			src={`${base}/img/elements/roses_left_02.webp`}
+			alt="Rosas laterales izquierdas"
+			class="rose-garland-img"
+			loading="lazy"
+		/>
+	</div>
+)}
+
+{variant === "right-garland-1" && (
+	<div class={`roses-side-wrapper right-garland-1 ${className}`}>
+		<img
+			src={`${base}/img/elements/right_01.webp`}
+			alt="Guirnalda lateral derecha"
+			class="rose-garland-img"
+			loading="lazy"
+		/>
+	</div>
+)}
+
+{variant === "right-garland-2" && (
+	<div class={`roses-side-wrapper right-garland-2 ${className}`}>
+		<img
+			src={`${base}/img/elements/right_02.webp`}
+			alt="Rosas laterales derechas"
+			class="rose-garland-img"
+			loading="lazy"
+		/>
+	</div>
+)}
+
+{variant === "divider" && (
+	<div class={`clean-divider-container ${className}`}>
+		<span class="divider-line"></span>
+		<span class="divider-gem">❖</span>
+		<span class="divider-line"></span>
+	</div>
+)}
+
+<style>
+	/* Header Arch */
+	.roses-header-arch-container {
+		width: 100%;
+		max-width: 440px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: center;
+		position: relative;
+		z-index: 2;
+	}
+
+	.roses-arch-img {
+		width: 100%;
+		height: auto;
+		object-fit: contain;
+		filter: drop-shadow(0 4px 10px rgba(110, 80, 50, 0.12));
+	}
+
+	.tiara-container {
+		display: flex;
+		justify-content: center;
+		margin: 2px auto;
+	}
+
+	/* Side Garlands attached strictly to the borders */
+	.roses-side-wrapper {
+		position: absolute;
+		z-index: 5;
+		pointer-events: none;
+		opacity: 0.95;
+		line-height: 0;
+	}
+
+	.rose-garland-img {
+		height: auto;
+		max-width: 100px;
+		object-fit: contain;
+		filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.1));
+	}
+
+	.left-garland-1 {
+		left: 0;
+	}
+
+	.left-garland-2 {
+		left: 0;
+	}
+
+	.right-garland-1 {
+		right: 0;
+	}
+
+	.right-garland-2 {
+		right: 0;
+	}
+
+	/* Clean Divider without photo */
+	.clean-divider-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 14px;
+		margin: 20px auto;
+		max-width: 260px;
+	}
+
+	.divider-line {
+		flex: 1;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, rgba(246, 185, 19, 0.6), transparent);
+	}
+
+	.divider-gem {
+		color: var(--c-gold-dark);
+		font-size: 10px;
+		opacity: 0.75;
+	}
+</style>

@@ -1,0 +1,103 @@
+---
+// DressCode.astro
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<div class="dresscode-wrapper">
+	<h3 class="dresscode-title">Código de vestimenta</h3>
+	<p class="dresscode-type">ETIQUETA</p>
+
+	<!-- Icons with NO background color, NO frame, pure transparent icons -->
+	<div class="dresscode-icons-container">
+		<div class="icon-figure">
+			<img src={`${base}/icons/suit_icon.png`} alt="Traje formal de etiqueta" class="clothing-icon" width="65" height="95" loading="lazy" />
+		</div>
+
+		<div class="icon-figure">
+			<img src={`${base}/icons/dress_icon.png`} alt="Vestido largo formal" class="clothing-icon" width="65" height="95" loading="lazy" />
+		</div>
+	</div>
+
+	<!-- Reserved color note -->
+	<div class="dresscode-note-card">
+		<p class="dresscode-note">
+			CON MUCHO CARIÑO, LES PEDIMOS EVITAR EL TONO ROSA PASTEL, YA QUE ESTÁ RESERVADO ESPECIALMENTE PARA LA QUINCEAÑERA.
+		</p>
+	</div>
+</div>
+
+<style>
+	.dresscode-wrapper {
+		margin: 20px auto;
+		max-width: 350px;
+		text-align: center;
+		padding: 16px 14px;
+		background: transparent;
+		position: relative;
+	}
+
+	.dresscode-title {
+		font-family: var(--font-script);
+		font-size: 40px;
+		color: var(--c-gold-dark);
+		margin: 0;
+		font-weight: normal;
+		line-height: 1;
+	}
+
+	.dresscode-type {
+		font-family: var(--font-serif);
+		font-size: 13px;
+		letter-spacing: 3.5px;
+		color: var(--c-text-title);
+		margin: 6px 0 16px;
+		font-weight: 700;
+	}
+
+	.dresscode-icons-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 32px;
+		margin-bottom: 16px;
+	}
+
+	.icon-figure {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		/* NO background, NO border, NO frame */
+		background: transparent;
+		border: none;
+		box-shadow: none;
+		padding: 0;
+	}
+
+	.clothing-icon {
+		height: 85px;
+		width: auto;
+		object-fit: contain;
+		filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+		transition: transform 0.3s ease;
+	}
+
+	.clothing-icon:hover {
+		transform: scale(1.05);
+	}
+
+	.dresscode-note-card {
+		padding: 8px 12px;
+		background: transparent;
+	}
+
+	.dresscode-note {
+		font-family: var(--font-serif);
+		font-size: 9.5px;
+		letter-spacing: 1.5px;
+		color: var(--c-text-body);
+		line-height: 1.6;
+		margin: 0;
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+</style>

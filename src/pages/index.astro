@@ -1,11 +1,840 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import AudioPlayer from '../components/AudioPlayer.astro';
+import Countdown from '../components/Countdown.astro';
+import Calendar from '../components/Calendar.astro';
+import Timeline from '../components/Timeline.astro';
+import DressCode from '../components/DressCode.astro';
+import GiftSection from '../components/GiftSection.astro';
+import RsvpSection from '../components/RsvpSection.astro';
+import FloralDecor from '../components/FloralDecor.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Mis XV Años - Claudia | 21 de Noviembre de 2026">
+	<main class="invitation-wrapper">
+		<!-- Central Card with Natural Warm Ivory Paper Background (No pink gradient in header) -->
+		<div class="invitation-card" id="invitation-card">
+
+			<!-- SECTION 1: HEADER & HERO -->
+			<section class="section-hero reveal-on-scroll">
+				<!-- Floral Arch Container: "Mis XV Años" and "Claudia" INSIDE the floral arch opening -->
+				<div class="floral-arch-header-wrapper parallax-element" data-speed="0.08">
+					<img
+						src={`${base}/img/elements/roses_arch.webp`}
+						alt="Arco de rosas de encabezado"
+						class="header-roses-arch-bg"
+						loading="eager"
+					/>
+
+					<div class="arch-inner-titles">
+						<h2 class="mis-anos-script">Mis XV Años</h2>
+						<FloralDecor variant="tiara" />
+						<h1 class="quinceanera-name">Claudia</h1>
+					</div>
+				</div>
+
+				<!-- Main Portrait Arch Frame (Sitting directly below the arch opening and name) -->
+				<div class="arch-frame-outer parallax-element" data-speed="-0.06">
+					<div class="arch-frame-inner">
+						<img
+							src={`${base}/img/img_quince_001.jpeg`}
+							alt="Claudia - Quinceañera"
+							class="arch-photo"
+							loading="eager"
+						/>
+					</div>
+				</div>
+
+				<!-- Left Rose Garland below the arch photo -->
+				<div class="rose-border-left pos-hero-left parallax-element" data-speed="0.10">
+					<FloralDecor variant="left-garland-1" />
+				</div>
+
+				<!-- Quote / Frase -->
+				<div class="quote-container">
+					<p class="quote-text">
+						“Siempre puedes soñar, y tus sueños se harán realidad, pero eres tú quien tiene que hacerlos realidad”
+					</p>
+					<span class="quote-author">— Michael Jackson</span>
+				</div>
+
+				<!-- Audio Player: Directly below main photo and quote -->
+				<AudioPlayer />
+
+				<!-- Clean Divider -->
+				<FloralDecor variant="divider" />
+
+				<!-- Parents & Godparents -->
+				<div class="family-section reveal-on-scroll">
+					<p class="family-intro">ACOMPÁÑAME EN ESTE DÍA TAN ESPECIAL JUNTO A</p>
+
+					<div class="family-group">
+						<h3 class="family-role">MIS PADRES:</h3>
+						<p class="family-names">Valerio Quispe Vergara</p>
+						<span class="family-amp">&</span>
+						<p class="family-names">Mary Pineda Loayza</p>
+					</div>
+
+					<div class="family-group">
+						<h3 class="family-role">MIS PADRINOS:</h3>
+						<p class="family-names">Crispin Mauro Ticona Surco</p>
+						<span class="family-amp">&</span>
+						<p class="family-names">Maria Soledad Quiespe Vergara de Ticona</p>
+					</div>
+
+					<p class="family-celebrate">A FESTEJAR MIS</p>
+					<h2 class="xv-anos-title">XV AÑOS</h2>
+				</div>
+
+				<!-- Date Header with Right Rose Cluster as in the template -->
+				<div class="event-date-callout reveal-on-scroll">
+					<span class="date-month">NOVIEMBRE</span>
+					<div class="date-day-row">
+						<span class="date-line"></span>
+						<span class="date-day-text">SÁBADO</span>
+						<span class="date-number">21</span>
+						<span class="date-year">2026</span>
+						<span class="date-line"></span>
+					</div>
+				</div>
+
+				<!-- Right Rose Garland positioned beside the date / countdown, exactly like the template -->
+				<div class="rose-border-right pos-date-right parallax-element" data-speed="-0.08">
+					<FloralDecor variant="right-garland-1" />
+				</div>
+
+				<!-- Countdown Timer -->
+				<div class="reveal-on-scroll">
+					<Countdown targetDate="2026-11-21T18:00:00-05:00" />
+				</div>
+
+				<!-- Monthly Calendar View -->
+				<div class="reveal-on-scroll">
+					<Calendar />
+				</div>
+
+				<!-- Location / Recepción Card -->
+				<div class="location-card reveal-on-scroll">
+					<div class="location-icon">
+						<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8">
+							<path d="M3 21h18M5 21V9a7 7 0 0 1 14 0v12M9 21v-6a3 3 0 0 1 6 0v6"/>
+						</svg>
+					</div>
+
+					<h3 class="location-heading">Recepción</h3>
+					<span class="location-time">6:00 PM</span>
+					<p class="location-address">
+						Av Machupichu J-4 Urb Manuel Prado - Cusco
+					</p>
+
+					<a
+						href="https://maps.app.goo.gl/WmfBaYC9Q72xYyUE6?g_st=ac"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="btn-location"
+					>
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+							<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+						</svg>
+						<span>VER UBICACIÓN</span>
+					</a>
+				</div>
+			</section>
+
+			<!-- SECTION 2: PHOTO ABOVE ITINERARY (PNG WITHOUT FRAME, SEAMLESS INTEGRATION INTO BACKGROUND + PARALLAX) -->
+			<section class="section-photo-seamless reveal-on-scroll">
+				<div class="rose-border-right pos-recep-right parallax-element" data-speed="0.10">
+					<FloralDecor variant="right-garland-2" />
+				</div>
+
+				<div class="seamless-img-wrapper parallax-element" data-speed="-0.07">
+					<img
+						src={`${base}/img/img_quince_002.webp`}
+						alt="Claudia en sus 15 años"
+						class="photo-seamless"
+						loading="lazy"
+					/>
+				</div>
+			</section>
+
+			<!-- SECTION 3: ITINERARY (NO ROSE ADORNMENTS AS REQUESTED) -->
+			<section class="section-itinerary reveal-on-scroll">
+				<Timeline />
+			</section>
+
+			<!-- SECTION 4: DRESS CODE -->
+			<section class="section-dresscode reveal-on-scroll">
+				<div class="rose-border-left pos-dress-left parallax-element" data-speed="0.10">
+					<FloralDecor variant="left-garland-1" />
+				</div>
+
+				<DressCode />
+			</section>
+
+			<!-- SECTION 5: PHOTO 3 WITH PARALLAX -->
+			<section class="section-photo-banner reveal-on-scroll">
+				<div class="rose-border-right pos-photo3-right parallax-element" data-speed="-0.08">
+					<FloralDecor variant="right-garland-1" />
+				</div>
+
+				<div class="photo-banner-frame parallax-element" data-speed="-0.06">
+					<img
+						src={`${base}/img/img_quince_003.jpeg`}
+						alt="Claudia - Sesión de fotos"
+						class="photo-banner-img"
+						loading="lazy"
+					/>
+				</div>
+			</section>
+
+			<!-- SECTION 6: GIFT SUGGESTIONS (YAPE IN PALETTE COLORS) -->
+			<section class="section-gifts reveal-on-scroll">
+				<div class="rose-border-right pos-gift-right parallax-element" data-speed="0.08">
+					<FloralDecor variant="right-garland-2" />
+				</div>
+
+				<GiftSection />
+			</section>
+
+			<!-- SECTION 7: RSVP -->
+			<section class="section-rsvp reveal-on-scroll">
+				<div class="rose-border-left pos-rsvp-left parallax-element" data-speed="0.08">
+					<FloralDecor variant="left-garland-2" />
+				</div>
+
+				<RsvpSection />
+			</section>
+
+			<!-- SECTION 8: FINAL PORTRAIT & FAREWELL -->
+			<section class="section-farewell reveal-on-scroll">
+				<div class="rose-border-right pos-farewell-right parallax-element" data-speed="-0.06">
+					<FloralDecor variant="right-garland-2" />
+				</div>
+
+				<div class="farewell-frame-outer parallax-element" data-speed="-0.05">
+					<div class="farewell-frame-inner">
+						<img
+							src={`${base}/img/img_quince_004.jpeg`}
+							alt="Claudia en sus 15 años"
+							class="farewell-photo"
+							loading="lazy"
+						/>
+					</div>
+				</div>
+
+				<div class="farewell-box">
+					<h2 class="farewell-script">¡Te esperamos!</h2>
+					<p class="farewell-sub">21 · 11 · 2026 · CUSCO</p>
+				</div>
+
+				<!-- Clean Divider -->
+				<div class="closing-floral">
+					<FloralDecor variant="divider" />
+				</div>
+			</section>
+		</div>
+	</main>
 </Layout>
+
+<style>
+	.invitation-wrapper {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		padding: 12px 6px 36px;
+	}
+
+	/* Card with Warm Ivory / Soft Cream Paper Background (NO pink gradient) */
+	.invitation-card {
+		width: 100%;
+		max-width: 460px;
+		background-color: #FAF7F2;
+		background-image: 
+			radial-gradient(rgba(200, 164, 200, 0.08) 1px, transparent 1px),
+			radial-gradient(rgba(246, 185, 19, 0.06) 1px, #FAF7F2 1px);
+		background-size: 24px 24px;
+		background-position: 0 0, 12px 12px;
+		box-shadow: 
+			0 18px 45px rgba(90, 70, 60, 0.16),
+			0 0 0 1px rgba(246, 185, 19, 0.3);
+		border-radius: 24px;
+		position: relative;
+		overflow: hidden;
+		margin: 0 auto;
+	}
+
+	/* Parallax Elements Base */
+	.parallax-element {
+		will-change: transform;
+		transition: transform 0.1s linear;
+	}
+
+	/* Scroll Reveal Effect */
+	.reveal-on-scroll {
+		opacity: 0;
+		transform: translateY(24px);
+		transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+		will-change: opacity, transform;
+	}
+
+	.reveal-on-scroll.is-visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	/* Side Rose Garlands stuck strictly to the borders */
+	.rose-border-left {
+		position: absolute;
+		left: 0;
+		pointer-events: none;
+		z-index: 5;
+		line-height: 0;
+	}
+
+	.rose-border-right {
+		position: absolute;
+		right: 0;
+		pointer-events: none;
+		z-index: 5;
+		line-height: 0;
+	}
+
+	.pos-hero-left {
+		top: 560px;
+	}
+
+	.pos-date-right {
+		top: 1100px;
+	}
+
+	.pos-recep-right {
+		top: -40px;
+	}
+
+	.pos-dress-left {
+		top: 10px;
+	}
+
+	.pos-photo3-right {
+		top: -30px;
+	}
+
+	.pos-gift-right {
+		top: 20px;
+	}
+
+	.pos-rsvp-left {
+		top: 30px;
+	}
+
+	.pos-farewell-right {
+		bottom: 60px;
+	}
+
+	/* SECTION 1: HERO & FLORAL ARCH HEADER */
+	.section-hero {
+		padding: 0 14px 20px;
+		text-align: center;
+		position: relative;
+	}
+
+	/* Floral arch container with titles positioned inside the arch opening */
+	.floral-arch-header-wrapper {
+		position: relative;
+		width: 100%;
+		max-width: 440px;
+		margin: 0 auto -24px;
+		text-align: center;
+	}
+
+	.header-roses-arch-bg {
+		width: 100%;
+		height: auto;
+		display: block;
+		object-fit: contain;
+		filter: drop-shadow(0 4px 10px rgba(110, 80, 50, 0.1));
+	}
+
+	/* Titles inside the arch opening */
+	.arch-inner-titles {
+		position: absolute;
+		top: 47%;
+		left: 50%;
+		transform: translate(-50%, -10%);
+		width: 84%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		pointer-events: none;
+	}
+
+	.mis-anos-script {
+		font-family: var(--font-script);
+		font-size: 36px;
+		color: #2b5443;
+		font-weight: normal;
+		margin: 0;
+		line-height: 1.1;
+		text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
+	}
+
+	.quinceanera-name {
+		font-family: var(--font-script);
+		font-size: 58px;
+		color: #c59737;
+		background: var(--gold-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		margin: -2px 0 0;
+		line-height: 1;
+		font-weight: normal;
+		filter: drop-shadow(0 2px 4px rgba(246, 185, 19, 0.35));
+	}
+
+	/* Arch Frame Photo (directly under the floral arch name) */
+	.arch-frame-outer {
+		max-width: 300px;
+		margin: 10px auto 18px;
+		padding: 7px;
+		border-radius: 170px 170px 18px 18px;
+		background: linear-gradient(135deg, rgba(246, 185, 19, 0.85) 0%, rgba(200, 164, 200, 0.6) 50%, rgba(246, 185, 19, 0.9) 100%);
+		box-shadow: 0 14px 32px rgba(110, 80, 50, 0.16), 0 0 18px rgba(246, 185, 19, 0.25);
+		position: relative;
+		z-index: 4;
+	}
+
+	.arch-frame-inner {
+		border-radius: 163px 163px 12px 12px;
+		overflow: hidden;
+		border: 3px solid #ffffff;
+		background: #ffffff;
+		line-height: 0;
+	}
+
+	.arch-photo {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 9/15;
+		object-fit: cover;
+		object-position: center top;
+		display: block;
+	}
+
+	/* Quote */
+	.quote-container {
+		max-width: 320px;
+		margin: 16px auto 10px;
+		text-align: center;
+		padding: 0 10px;
+		position: relative;
+		z-index: 4;
+	}
+
+	.quote-text {
+		font-family: var(--font-serif);
+		font-size: 11px;
+		font-style: italic;
+		color: var(--c-text-body);
+		line-height: 1.6;
+		letter-spacing: 0.8px;
+		text-transform: uppercase;
+		margin-bottom: 6px;
+	}
+
+	.quote-author {
+		font-family: var(--font-body);
+		font-size: 9.5px;
+		font-weight: 600;
+		color: var(--c-gold-dark);
+		letter-spacing: 1.5px;
+	}
+
+	/* Family Section */
+	.family-section {
+		text-align: center;
+		padding: 16px 12px;
+		max-width: 360px;
+		margin: 0 auto;
+		position: relative;
+		z-index: 4;
+	}
+
+	.family-intro {
+		font-family: var(--font-serif);
+		font-size: 10px;
+		font-weight: 600;
+		letter-spacing: 2.2px;
+		color: var(--c-text-light);
+		margin-bottom: 18px;
+	}
+
+	.family-group {
+		margin-bottom: 18px;
+	}
+
+	.family-role {
+		font-family: var(--font-serif);
+		font-size: 11px;
+		letter-spacing: 2px;
+		color: var(--c-gold-dark);
+		font-weight: 700;
+		margin-bottom: 6px;
+		text-transform: uppercase;
+	}
+
+	.family-names {
+		font-family: var(--font-script);
+		font-size: 28px;
+		color: var(--c-text-title);
+		margin: 0;
+		line-height: 1.1;
+		font-weight: normal;
+	}
+
+	.family-amp {
+		font-family: var(--font-script);
+		font-size: 22px;
+		color: var(--c-gold);
+		display: block;
+		margin: -2px 0;
+	}
+
+	.family-celebrate {
+		font-family: var(--font-serif);
+		font-size: 10px;
+		letter-spacing: 2px;
+		color: var(--c-text-light);
+		margin: 22px 0 4px;
+	}
+
+	.xv-anos-title {
+		font-family: var(--font-serif);
+		font-size: 24px;
+		font-weight: 700;
+		letter-spacing: 4px;
+		color: var(--c-text-title);
+		margin: 0;
+	}
+
+	/* Date Callout */
+	.event-date-callout {
+		margin: 20px auto 14px;
+		max-width: 320px;
+		text-align: center;
+		position: relative;
+		z-index: 4;
+	}
+
+	.date-month {
+		font-family: var(--font-serif);
+		font-size: 12px;
+		letter-spacing: 3.5px;
+		color: var(--c-text-light);
+		text-transform: uppercase;
+		display: block;
+		margin-bottom: 4px;
+	}
+
+	.date-day-row {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 12px;
+	}
+
+	.date-line {
+		flex: 1;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, rgba(246, 185, 19, 0.6), transparent);
+	}
+
+	.date-day-text {
+		font-family: var(--font-serif);
+		font-size: 11px;
+		letter-spacing: 2px;
+		color: var(--c-text-body);
+		font-weight: 600;
+	}
+
+	.date-number {
+		font-family: var(--font-script);
+		font-size: 42px;
+		color: var(--c-gold-dark);
+		line-height: 1;
+		margin: 0 -4px;
+	}
+
+	.date-year {
+		font-family: var(--font-serif);
+		font-size: 11px;
+		letter-spacing: 2px;
+		color: var(--c-text-body);
+		font-weight: 600;
+	}
+
+	/* Location Card */
+	.location-card {
+		margin: 24px auto 10px;
+		max-width: 350px;
+		text-align: center;
+		padding: 22px 20px;
+		background: #ffffff;
+		border-radius: 22px;
+		border: 1.5px solid rgba(246, 185, 19, 0.45);
+		box-shadow: 
+			0 10px 25px rgba(110, 80, 50, 0.08),
+			0 4px 12px rgba(186, 217, 245, 0.18);
+		position: relative;
+		z-index: 4;
+	}
+
+	.location-icon {
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, rgba(186, 217, 245, 0.45) 0%, rgba(200, 164, 200, 0.4) 100%);
+		color: var(--c-gold-dark);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 10px;
+		border: 1.5px solid var(--c-gold);
+		box-shadow: 0 4px 12px rgba(246, 185, 19, 0.22);
+	}
+
+	.location-heading {
+		font-family: var(--font-script);
+		font-size: 38px;
+		color: var(--c-gold-dark);
+		margin: 0;
+		font-weight: normal;
+		line-height: 1;
+	}
+
+	.location-time {
+		display: inline-block;
+		font-family: var(--font-serif);
+		font-size: 12px;
+		letter-spacing: 2px;
+		color: var(--c-gold-dark);
+		font-weight: 700;
+		background: rgba(246, 185, 19, 0.18);
+		padding: 3px 12px;
+		border-radius: 12px;
+		margin: 6px 0 10px;
+		border: 1px solid rgba(246, 185, 19, 0.35);
+	}
+
+	.location-address {
+		font-size: 12px;
+		color: var(--c-text-body);
+		line-height: 1.5;
+		margin-bottom: 16px;
+	}
+
+	.btn-location {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		background: var(--gold-gradient);
+		color: #ffffff;
+		padding: 11px 22px;
+		border-radius: 22px;
+		font-size: 10.5px;
+		font-weight: 700;
+		letter-spacing: 1.5px;
+		box-shadow: 0 4px 14px rgba(246, 185, 19, 0.4);
+		transition: all 0.3s ease;
+	}
+
+	.btn-location:hover {
+		transform: translateY(-2px) scale(1.03);
+		box-shadow: 0 6px 18px rgba(246, 185, 19, 0.55);
+	}
+
+	/* SECTION 2: PHOTO ABOVE ITINERARY (PNG WITHOUT FRAME) */
+	.section-photo-seamless {
+		position: relative;
+		width: 100%;
+		margin: 10px 0 0;
+		padding: 0;
+		line-height: 0;
+		overflow: visible;
+	}
+
+	.seamless-img-wrapper {
+		width: 100%;
+		background: transparent;
+		line-height: 0;
+		position: relative;
+		z-index: 3;
+	}
+
+	.photo-seamless {
+		width: 100%;
+		height: auto;
+		display: block;
+		background: transparent;
+	}
+
+	/* SECTION 3: ITINERARY (NO ROSE ADORNMENTS) */
+	.section-itinerary {
+		position: relative;
+		padding-top: 10px;
+	}
+
+	/* SECTION 4: DRESS CODE */
+	.section-dresscode {
+		position: relative;
+	}
+
+	/* SECTION 5: PHOTO 3 */
+	.section-photo-banner {
+		position: relative;
+		padding: 16px 18px;
+	}
+
+	.photo-banner-frame {
+		border-radius: 18px;
+		overflow: hidden;
+		box-shadow: 0 10px 25px rgba(110, 80, 50, 0.1);
+		background: #ffffff;
+		line-height: 0;
+	}
+
+	.photo-banner-img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	/* SECTION 6: GIFTS */
+	.section-gifts {
+		position: relative;
+	}
+
+	/* SECTION 7: RSVP */
+	.section-rsvp {
+		position: relative;
+	}
+
+	/* SECTION 8: FAREWELL */
+	.section-farewell {
+		text-align: center;
+		padding: 24px 18px 40px;
+		position: relative;
+	}
+
+	.farewell-frame-outer {
+		max-width: 250px;
+		margin: 0 auto 20px;
+		padding: 7px;
+		border-radius: 18px;
+		background: linear-gradient(135deg, #c59737 0%, #f7d277 50%, #b38222 100%);
+		box-shadow: 
+			0 12px 25px rgba(0, 0, 0, 0.12),
+			0 0 15px rgba(246, 185, 19, 0.3);
+	}
+
+	.farewell-frame-inner {
+		border-radius: 12px;
+		overflow: hidden;
+		border: 2px solid #ffffff;
+		line-height: 0;
+	}
+
+	.farewell-photo {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 9/13;
+		object-fit: cover;
+		object-position: center top;
+		display: block;
+	}
+
+	.farewell-script {
+		font-family: var(--font-script);
+		font-size: 56px;
+		color: #c59737;
+		background: var(--gold-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		margin: 0 0 4px;
+		font-weight: normal;
+		line-height: 1.1;
+		filter: drop-shadow(0 2px 4px rgba(246, 185, 19, 0.25));
+	}
+
+	.farewell-sub {
+		font-family: var(--font-serif);
+		font-size: 11px;
+		letter-spacing: 3px;
+		color: var(--c-text-light);
+		margin: 0;
+	}
+
+	.closing-floral {
+		margin-top: 14px;
+	}
+</style>
+
+<script>
+	// Parallax and Scroll Reveal Interaction
+	document.addEventListener('DOMContentLoaded', () => {
+		// 1. Scroll Reveal for sections and cards
+		const revealElements = document.querySelectorAll('.reveal-on-scroll');
+		const observerOptions: IntersectionObserverInit = {
+			root: null,
+			rootMargin: '0px 0px -40px 0px',
+			threshold: 0.1
+		};
+
+		const revealObserver = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('is-visible');
+				}
+			});
+		}, observerOptions);
+
+		revealElements.forEach((el) => {
+			revealObserver.observe(el);
+		});
+
+		// 2. Parallax Floating Depth on Scroll
+		const parallaxElements = document.querySelectorAll<HTMLElement>('.parallax-element');
+		let isTicking = false;
+
+		const handleParallax = () => {
+			const windowHeight = window.innerHeight;
+			const windowCenter = windowHeight / 2;
+
+			parallaxElements.forEach((el) => {
+				const rect = el.getBoundingClientRect();
+				if (rect.bottom > -100 && rect.top < windowHeight + 100) {
+					const elementCenter = rect.top + rect.height / 2;
+					const distanceFromCenter = elementCenter - windowCenter;
+					const speed = parseFloat(el.dataset.speed || '0.1');
+					const translateY = Math.round(distanceFromCenter * speed);
+					el.style.transform = `translateY(${translateY}px)`;
+				}
+			});
+			isTicking = false;
+		};
+
+		const onScroll = () => {
+			if (!isTicking) {
+				window.requestAnimationFrame(handleParallax);
+				isTicking = true;
+			}
+		};
+
+		window.addEventListener('scroll', onScroll, { passive: true });
+		window.addEventListener('resize', onScroll, { passive: true });
+
+		handleParallax();
+	});
+</script>

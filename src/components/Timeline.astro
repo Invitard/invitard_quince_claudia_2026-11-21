@@ -1,0 +1,199 @@
+---
+// Timeline.astro
+const events = [
+	{
+		time: "6:00 PM",
+		title: "Recepción de Invitados",
+		description: "Bienvenida y cóctel de inicio",
+		icon: "arch",
+		accentColor: "#BAD9F5",
+		accentBorder: "#80b2de"
+	},
+	{
+		time: "7:30 PM",
+		title: "Ingreso de Claudia",
+		description: "Vals principal y entrada triunfal",
+		icon: "waltz",
+		accentColor: "#C8A4C8",
+		accentBorder: "#a87fa8"
+	},
+	{
+		time: "8:40 PM",
+		title: "Cena de Gala",
+		description: "Banquete y brindis de honor",
+		icon: "dinner",
+		accentColor: "#ECBA7F",
+		accentBorder: "#d49a55"
+	},
+	{
+		time: "10:00 PM",
+		title: "Sorpresa para Invitados",
+		description: "Show especial y fiesta inolvidable",
+		icon: "surprise",
+		accentColor: "#F6B913",
+		accentBorder: "#c59737"
+	}
+];
+---
+
+<div class="timeline-section">
+	<h3 class="timeline-heading">Itinerario</h3>
+	<p class="timeline-subheading">DE ACTIVIDADES</p>
+
+	<div class="timeline-container">
+		<div class="timeline-vertical-line"></div>
+
+		{events.map((event, index) => (
+			<div class="timeline-item" style={`animation-delay: ${index * 0.15}s;`}>
+				<div
+					class="timeline-icon-badge"
+					style={`background: linear-gradient(135deg, #ffffff 30%, ${event.accentColor} 100%); border-color: ${event.accentBorder};`}
+				>
+					{event.icon === "arch" && (
+						<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M3 21h18M5 21V9a7 7 0 0 1 14 0v12M9 21v-6a3 3 0 0 1 6 0v6"/>
+						</svg>
+					)}
+					{event.icon === "waltz" && (
+						<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M12 2l3 5h6l-4.5 4 2 6-6.5-4-6.5 4 2-6L2 7h6z"/>
+						</svg>
+					)}
+					{event.icon === "dinner" && (
+						<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="12" cy="12" r="9"/>
+							<path d="M12 8v8M8 12h8"/>
+							<path d="M18 15l2 2M6 15l-2 2"/>
+						</svg>
+					)}
+					{event.icon === "surprise" && (
+						<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M20 12v10H4V12"/>
+							<path d="M2 7h20v5H2z"/>
+							<path d="M12 22V7"/>
+							<path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+							<path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+						</svg>
+					)}
+				</div>
+
+				<div class="timeline-content">
+					<span
+						class="timeline-time"
+						style={`background: ${event.accentColor}; color: #3d2f26; border: 1px solid ${event.accentBorder};`}
+					>
+						{event.time}
+					</span>
+					<h4 class="timeline-title">{event.title}</h4>
+					<p class="timeline-desc">{event.description}</p>
+				</div>
+			</div>
+		))}
+	</div>
+</div>
+
+<style>
+	.timeline-section {
+		text-align: center;
+		padding: 24px 16px;
+		max-width: 380px;
+		margin: 0 auto;
+	}
+
+	.timeline-heading {
+		font-family: var(--font-script);
+		font-size: 40px;
+		color: var(--c-gold-dark);
+		margin: 0;
+		font-weight: normal;
+		line-height: 1;
+	}
+
+	.timeline-subheading {
+		font-family: var(--font-serif);
+		font-size: 11px;
+		letter-spacing: 3.5px;
+		color: var(--c-text-light);
+		margin: 4px 0 24px;
+		font-weight: 600;
+	}
+
+	.timeline-container {
+		position: relative;
+		padding: 10px 0;
+	}
+
+	.timeline-vertical-line {
+		position: absolute;
+		left: 28px;
+		top: 15px;
+		bottom: 25px;
+		width: 3px;
+		background: linear-gradient(180deg, #BAD9F5 0%, #C8A4C8 35%, #ECBA7F 70%, #F6B913 100%);
+		border-radius: 2px;
+		opacity: 0.75;
+	}
+
+	.timeline-item {
+		display: flex;
+		align-items: flex-start;
+		gap: 16px;
+		margin-bottom: 24px;
+		position: relative;
+		text-align: left;
+	}
+
+	.timeline-item:last-child {
+		margin-bottom: 0;
+	}
+
+	.timeline-icon-badge {
+		position: relative;
+		z-index: 2;
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		border: 1.8px solid var(--c-gold);
+		color: var(--c-text-title);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+		flex-shrink: 0;
+		transition: transform 0.3s ease;
+	}
+
+	.timeline-item:hover .timeline-icon-badge {
+		transform: scale(1.1);
+	}
+
+	.timeline-content {
+		padding-top: 2px;
+	}
+
+	.timeline-time {
+		display: inline-block;
+		font-family: var(--font-serif);
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 1px;
+		padding: 3px 10px;
+		border-radius: 12px;
+		margin-bottom: 4px;
+		box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+	}
+
+	.timeline-title {
+		font-family: var(--font-serif);
+		font-size: 15px;
+		font-weight: 600;
+		color: var(--c-text-title);
+		margin: 2px 0;
+	}
+
+	.timeline-desc {
+		font-size: 11.5px;
+		color: var(--c-text-light);
+		line-height: 1.35;
+	}
+</style>

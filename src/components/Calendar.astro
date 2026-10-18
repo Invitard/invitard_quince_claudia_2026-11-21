@@ -1,0 +1,182 @@
+---
+// Calendar.astro
+// November 2026:
+// 1st of Nov 2026 is a Sunday (day 7 of week if Monday is 1st)
+// Total 30 days
+// Weekdays: LUN, MAR, MIÉ, JUE, VIE, SÁB, DOM
+// Row 1: empty 6 slots (Mon-Sat), then 1 (Sun)
+// Day 21 is Saturday
+---
+
+<div class="calendar-wrapper">
+	<h3 class="calendar-subtitle">El Gran Día</h3>
+	<h4 class="calendar-month">Noviembre 2026</h4>
+
+	<div class="calendar-grid">
+		<div class="day-head">LUN</div>
+		<div class="day-head">MAR</div>
+		<div class="day-head">MIÉ</div>
+		<div class="day-head">JUE</div>
+		<div class="day-head">VIE</div>
+		<div class="day-head">SÁB</div>
+		<div class="day-head">DOM</div>
+
+		<!-- Week 1: 1 is Sunday -->
+		<div class="day-cell empty"></div>
+		<div class="day-cell empty"></div>
+		<div class="day-cell empty"></div>
+		<div class="day-cell empty"></div>
+		<div class="day-cell empty"></div>
+		<div class="day-cell empty"></div>
+		<div class="day-cell">1</div>
+
+		<!-- Week 2 -->
+		<div class="day-cell">2</div>
+		<div class="day-cell">3</div>
+		<div class="day-cell">4</div>
+		<div class="day-cell">5</div>
+		<div class="day-cell">6</div>
+		<div class="day-cell">7</div>
+		<div class="day-cell">8</div>
+
+		<!-- Week 3 -->
+		<div class="day-cell">9</div>
+		<div class="day-cell">10</div>
+		<div class="day-cell">11</div>
+		<div class="day-cell">12</div>
+		<div class="day-cell">13</div>
+		<div class="day-cell">14</div>
+		<div class="day-cell">15</div>
+
+		<!-- Week 4: 21 is Saturday! -->
+		<div class="day-cell">16</div>
+		<div class="day-cell">17</div>
+		<div class="day-cell">18</div>
+		<div class="day-cell">19</div>
+		<div class="day-cell">20</div>
+		<div class="day-cell special-day" title="¡El Gran Día!">
+			<span class="special-number">21</span>
+			<span class="heart-mark">♥</span>
+		</div>
+		<div class="day-cell">22</div>
+
+		<!-- Week 5 -->
+		<div class="day-cell">23</div>
+		<div class="day-cell">24</div>
+		<div class="day-cell">25</div>
+		<div class="day-cell">26</div>
+		<div class="day-cell">27</div>
+		<div class="day-cell">28</div>
+		<div class="day-cell">29</div>
+
+		<!-- Week 6 -->
+		<div class="day-cell">30</div>
+		<div class="day-cell empty"></div>
+		<div class="day-cell empty"></div>
+		<div class="day-cell empty"></div>
+		<div class="day-cell empty"></div>
+		<div class="day-cell empty"></div>
+		<div class="day-cell empty"></div>
+	</div>
+</div>
+
+<style>
+	.calendar-wrapper {
+		margin: 16px auto;
+		max-width: 290px;
+		text-align: center;
+		padding: 14px 16px;
+		background: rgba(255, 255, 255, 0.5);
+		border-radius: 16px;
+		border: 1px dashed rgba(246, 185, 19, 0.4);
+	}
+
+	.calendar-subtitle {
+		font-family: var(--font-script);
+		font-size: 32px;
+		color: var(--c-gold-dark);
+		margin: 0;
+		font-weight: normal;
+		line-height: 1;
+	}
+
+	.calendar-month {
+		font-family: var(--font-serif);
+		font-size: 13px;
+		letter-spacing: 2.5px;
+		text-transform: uppercase;
+		color: var(--c-text-body);
+		margin: 6px 0 12px;
+		font-weight: 600;
+	}
+
+	.calendar-grid {
+		display: grid;
+		grid-template-columns: repeat(7, 1fr);
+		row-gap: 6px;
+		column-gap: 2px;
+		font-size: 11px;
+	}
+
+	.day-head {
+		font-family: var(--font-body);
+		font-size: 9px;
+		font-weight: 600;
+		color: var(--c-text-light);
+		padding-bottom: 6px;
+		border-bottom: 1px solid rgba(196, 199, 208, 0.5);
+	}
+
+	.day-cell {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 26px;
+		color: var(--c-text-body);
+		font-family: var(--font-serif);
+		position: relative;
+	}
+
+	.day-cell.empty {
+		visibility: hidden;
+	}
+
+	.special-day {
+		font-weight: 700;
+		color: #ffffff;
+	}
+
+	.special-number {
+		position: relative;
+		z-index: 2;
+		color: #ffffff;
+		font-size: 12px;
+	}
+
+	.special-day::before {
+		content: '';
+		position: absolute;
+		width: 24px;
+		height: 24px;
+		background: var(--gold-gradient);
+		border-radius: 50%;
+		z-index: 1;
+		box-shadow: 0 2px 8px rgba(246, 185, 19, 0.45);
+	}
+
+	.heart-mark {
+		position: absolute;
+		top: -4px;
+		right: 0px;
+		z-index: 3;
+		font-size: 8px;
+		color: #d84b72;
+		animation: pulseHeart 1.5s infinite alternate ease-in-out;
+	}
+
+	@keyframes pulseHeart {
+		0% { transform: scale(0.9); }
+		100% { transform: scale(1.2); }
+	}
+</style>
+

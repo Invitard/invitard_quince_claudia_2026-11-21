@@ -1,0 +1,307 @@
+---
+// GiftSection.astro
+---
+
+<div class="gift-section-wrapper">
+	<!-- Floral Accent Top -->
+	<div class="gift-floral-top">
+		<svg viewBox="0 0 160 30" width="120" height="22">
+			<path d="M10 15 Q80 5 150 15" fill="none" stroke="url(#goldFoil)" stroke-width="1.2"/>
+			<circle cx="80" cy="12" r="5" fill="#C8A4C8"/>
+			<circle cx="68" cy="14" r="3.5" fill="#BAD9F5"/>
+			<circle cx="92" cy="14" r="3.5" fill="#BAD9F5"/>
+			<circle cx="58" cy="15" r="2.5" fill="#ECBA7F"/>
+			<circle cx="102" cy="15" r="2.5" fill="#ECBA7F"/>
+			<circle cx="48" cy="15" r="2" fill="#F6B913"/>
+			<circle cx="112" cy="15" r="2" fill="#F6B913"/>
+			<defs>
+				<linearGradient id="goldFoil" x1="0%" y1="0%" x2="100%" y2="0%">
+					<stop offset="0%" stop-color="transparent"/>
+					<stop offset="50%" stop-color="#F6B913"/>
+					<stop offset="100%" stop-color="transparent"/>
+				</linearGradient>
+			</defs>
+		</svg>
+	</div>
+
+	<div class="gift-icon-container">
+		<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+			<polyline points="20 12 20 22 4 22 4 12"></polyline>
+			<rect x="2" y="7" width="20" height="5"></rect>
+			<line x1="12" y1="22" x2="12" y2="7"></line>
+			<path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+			<path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+		</svg>
+	</div>
+
+	<h3 class="gift-title">Sugerencia de regalos</h3>
+	<p class="gift-text">
+		Tu presencia es mi mayor alegría. Si deseas hacerme un detalle para acompañar mis sueños en esta nueva etapa, puedes hacerlo con una transferencia o Yape:
+	</p>
+
+	<!-- Yape Card styled with palette colors -->
+	<div class="yape-card-palette">
+		<div class="yape-card-inner">
+			<div class="yape-header">
+				<div class="yape-badge-palette">
+					<span class="yape-flower-dot"></span>
+					<strong>YAPE</strong>
+				</div>
+				<span class="yape-subtitle">BANCO & BILLETERA DIGITAL</span>
+			</div>
+
+			<div class="yape-details">
+				<div class="detail-row">
+					<span class="detail-label">NÚMERO DE TELÉFONO:</span>
+					<strong class="detail-number" id="yape-phone-num">944498113</strong>
+				</div>
+				<div class="detail-divider"></div>
+				<div class="detail-row">
+					<span class="detail-label">TITULAR DE LA CUENTA:</span>
+					<strong class="detail-name">Valerio Quispe Vergara</strong>
+				</div>
+			</div>
+
+			<button class="btn-copy-yape-palette" id="copy-yape-btn" data-phone="944498113">
+				<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+					<path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+				</svg>
+				<span id="copy-btn-text">COPIAR NÚMERO</span>
+			</button>
+		</div>
+	</div>
+
+	<!-- Toast alert -->
+	<div class="toast-copied" id="toast-copied">
+		✓ ¡Número copiado al portapapeles!
+	</div>
+</div>
+
+<style>
+	.gift-section-wrapper {
+		margin: 24px auto;
+		max-width: 350px;
+		text-align: center;
+		padding: 24px 18px 22px;
+		background: #ffffff;
+		border-radius: 24px;
+		border: 1.5px solid rgba(246, 185, 19, 0.45);
+		box-shadow: 
+			0 10px 30px rgba(200, 164, 200, 0.18),
+			0 4px 12px rgba(186, 217, 245, 0.25);
+		position: relative;
+	}
+
+	.gift-floral-top {
+		margin-bottom: 8px;
+		display: flex;
+		justify-content: center;
+	}
+
+	.gift-icon-container {
+		width: 52px;
+		height: 52px;
+		margin: 0 auto 12px;
+		background: linear-gradient(135deg, rgba(200, 164, 200, 0.3) 0%, rgba(186, 217, 245, 0.4) 100%);
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--c-gold-dark);
+		border: 1.5px solid var(--c-gold);
+		box-shadow: 0 4px 12px rgba(246, 185, 19, 0.25);
+	}
+
+	.gift-title {
+		font-family: var(--font-script);
+		font-size: 38px;
+		color: var(--c-gold-dark);
+		margin: 0;
+		font-weight: normal;
+		line-height: 1.1;
+	}
+
+	.gift-text {
+		font-size: 11.5px;
+		color: var(--c-text-body);
+		line-height: 1.55;
+		margin: 10px 0 18px;
+		padding: 0 6px;
+	}
+
+	/* Yape Card matching the pastel palette */
+	.yape-card-palette {
+		background: linear-gradient(135deg, #f7f1f9 0%, #edf5fc 50%, #fdf6ec 100%);
+		border-radius: 18px;
+		padding: 3px;
+		border: 1.5px solid rgba(200, 164, 200, 0.6);
+		box-shadow: 
+			0 6px 20px rgba(200, 164, 200, 0.2),
+			0 2px 8px rgba(186, 217, 245, 0.3);
+	}
+
+	.yape-card-inner {
+		background: rgba(255, 255, 255, 0.92);
+		border-radius: 15px;
+		padding: 16px 14px;
+		border: 1px dashed rgba(246, 185, 19, 0.5);
+	}
+
+	.yape-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 14px;
+		padding-bottom: 8px;
+		border-bottom: 1px solid rgba(200, 164, 200, 0.4);
+	}
+
+	.yape-badge-palette {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 14px;
+		letter-spacing: 1.5px;
+		color: #5d3568;
+		background: linear-gradient(135deg, rgba(200, 164, 200, 0.35), rgba(186, 217, 245, 0.4));
+		padding: 4px 10px;
+		border-radius: 20px;
+		border: 1px solid rgba(200, 164, 200, 0.6);
+	}
+
+	.yape-flower-dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background-color: var(--c-gold);
+		display: inline-block;
+		box-shadow: 0 0 6px var(--c-gold);
+	}
+
+	.yape-subtitle {
+		font-family: var(--font-serif);
+		font-size: 8.5px;
+		letter-spacing: 1.5px;
+		color: var(--c-text-light);
+		font-weight: 600;
+	}
+
+	.yape-details {
+		text-align: center;
+		margin-bottom: 16px;
+	}
+
+	.detail-row {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2px;
+	}
+
+	.detail-divider {
+		height: 1px;
+		width: 60%;
+		margin: 8px auto;
+		background: linear-gradient(90deg, transparent, rgba(246, 185, 19, 0.4), transparent);
+	}
+
+	.detail-label {
+		font-family: var(--font-serif);
+		font-size: 9.5px;
+		color: var(--c-text-light);
+		letter-spacing: 1.8px;
+		font-weight: 600;
+	}
+
+	.detail-number {
+		font-family: var(--font-serif);
+		font-size: 24px;
+		color: var(--c-gold-dark);
+		letter-spacing: 2px;
+		font-weight: 700;
+		background: var(--gold-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.detail-name {
+		font-family: var(--font-serif);
+		font-size: 14px;
+		color: var(--c-text-title);
+		letter-spacing: 0.5px;
+		font-weight: 600;
+	}
+
+	.btn-copy-yape-palette {
+		width: 100%;
+		padding: 12px 16px;
+		background: var(--gold-gradient);
+		color: #ffffff;
+		border-radius: 25px;
+		font-family: var(--font-body);
+		font-weight: 700;
+		font-size: 11px;
+		letter-spacing: 1.8px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 15px rgba(246, 185, 19, 0.4);
+	}
+
+	.btn-copy-yape-palette:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px rgba(246, 185, 19, 0.6);
+	}
+
+	.btn-copy-yape-palette:active {
+		transform: scale(0.98);
+	}
+
+	.toast-copied {
+		position: absolute;
+		bottom: -14px;
+		left: 50%;
+		transform: translateX(-50%) translateY(10px);
+		background: #3e3129;
+		color: #ffffff;
+		font-size: 11.5px;
+		padding: 7px 18px;
+		border-radius: 20px;
+		opacity: 0;
+		pointer-events: none;
+		transition: all 0.3s ease;
+		white-space: nowrap;
+		box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+		z-index: 10;
+		border: 1px solid var(--c-gold);
+	}
+
+	.toast-copied.show {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+</style>
+
+<script>
+	const copyBtn = document.getElementById('copy-yape-btn');
+	const toast = document.getElementById('toast-copied');
+	const btnText = document.getElementById('copy-btn-text');
+
+	copyBtn?.addEventListener('click', () => {
+		const phone = copyBtn.getAttribute('data-phone') || '944498113';
+		navigator.clipboard.writeText(phone).then(() => {
+			if (btnText) btnText.textContent = '¡NÚMERO COPIADO!';
+			if (toast) {
+				toast.classList.add('show');
+				setTimeout(() => {
+					toast.classList.remove('show');
+					if (btnText) btnText.textContent = 'COPIAR NÚMERO';
+				}, 2600);
+			}
+		}).catch(() => {
+			alert('Número: ' + phone);
+		});
+	});
+</script>

@@ -1,0 +1,143 @@
+---
+// Countdown.astro
+interface Props {
+	targetDate?: string;
+}
+
+const { targetDate = "2026-11-21T18:00:00-05:00" } = Astro.props;
+---
+
+<div class="countdown-section">
+	<h3 class="countdown-title">Faltan</h3>
+	<div class="countdown-grid" id="countdown-timer" data-target={targetDate}>
+		<div class="time-block">
+			<span class="time-val" id="cd-days">00</span>
+			<span class="time-lbl">DÍAS</span>
+		</div>
+		<span class="time-sep">:</span>
+		<div class="time-block">
+			<span class="time-val" id="cd-hours">00</span>
+			<span class="time-lbl">HORAS</span>
+		</div>
+		<span class="time-sep">:</span>
+		<div class="time-block">
+			<span class="time-val" id="cd-minutes">00</span>
+			<span class="time-lbl">MINUTOS</span>
+		</div>
+		<span class="time-sep">:</span>
+		<div class="time-block">
+			<span class="time-val" id="cd-seconds">00</span>
+			<span class="time-lbl">SEGUNDOS</span>
+		</div>
+	</div>
+</div>
+
+<style>
+	.countdown-section {
+		text-align: center;
+		padding: 10px 0 20px;
+	}
+
+	.countdown-title {
+		font-family: var(--font-script);
+		font-size: 34px;
+		color: var(--c-gold-dark);
+		margin: 0 0 6px;
+		font-weight: normal;
+	}
+
+	.countdown-grid {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+	}
+
+	.time-block {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		min-width: 48px;
+	}
+
+	.time-val {
+		font-family: var(--font-serif);
+		font-size: 26px;
+		font-weight: 700;
+		color: #2e604a; /* soft forest / emerald like in template */
+		background: linear-gradient(180deg, #1f4f3b 0%, #3d795f 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		letter-spacing: 1px;
+		line-height: 1.1;
+	}
+
+	.time-sep {
+		font-family: var(--font-serif);
+		font-size: 22px;
+		font-weight: 700;
+		color: #3d795f;
+		margin-top: -14px;
+		animation: blink 1.2s infinite;
+	}
+
+	.time-lbl {
+		font-family: var(--font-body);
+		font-size: 8.5px;
+		font-weight: 600;
+		letter-spacing: 1.5px;
+		color: var(--c-text-light);
+		margin-top: 4px;
+		text-transform: uppercase;
+	}
+
+	@keyframes blink {
+		0%, 100% { opacity: 1; }
+		50% { opacity: 0.3; }
+	}
+</style>
+
+<script>
+	const initCountdown = () => {
+		const timerEl = document.getElementById('countdown-timer');
+		if (!timerEl) return;
+		const targetStr = timerEl.dataset.target || '2026-11-21T18:00:00-05:00';
+		const targetTime = new Date(targetStr).getTime();
+
+		const daysEl = document.getElementById('cd-days');
+		const hoursEl = document.getElementById('cd-hours');
+		const minsEl = document.getElementById('cd-minutes');
+		const secsEl = document.getElementById('cd-seconds');
+
+		const pad = (n: number) => n < 10 ? `0${n}` : `${n}`;
+
+		const update = () => {
+			const now = new Date().getTime();
+			const diff = targetTime - now;
+
+			if (diff <= 0) {
+				if (daysEl) daysEl.textContent = '00';
+				if (hoursEl) hoursEl.textContent = '00';
+				if (minsEl) minsEl.textContent = '00';
+				if (secsEl) secsEl.textContent = '00';
+				return;
+			}
+
+			const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+			const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+			const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+			if (daysEl) daysEl.textContent = pad(days);
+			if (hoursEl) hoursEl.textContent = pad(hours);
+			if (minsEl) minsEl.textContent = pad(minutes);
+			if (secsEl) secsEl.textContent = pad(seconds);
+		};
+
+		update();
+		setInterval(update, 1000);
+	};
+
+	initCountdown();
+</script>
+

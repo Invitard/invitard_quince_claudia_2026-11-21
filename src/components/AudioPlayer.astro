@@ -1,0 +1,427 @@
+---
+// AudioPlayer.astro
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<div class="audio-player-wrapper" id="audio-player-container">
+	<div class="player-header">
+		<span class="music-note">♪</span>
+		<h3 class="dale-play">DALE PLAY</h3>
+		<span class="music-note">♪</span>
+	</div>
+
+	<p class="song-title">Veo En Ti La Luz</p>
+	<p class="song-artist">Danna Paola & Chayanne</p>
+
+	<!-- Audio Element -->
+	<audio id="quince-audio" preload="metadata">
+		<source src={`${base}/music/cancion.mp3`} type="audio/mpeg" />
+		Tu navegador no soporta el reproductor de audio.
+	</audio>
+
+	<!-- Custom Player Controls -->
+	<div class="controls-container">
+		<button class="ctrl-btn secondary-btn" id="btn-restart" aria-label="Reiniciar canción" title="Reiniciar">
+			<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+				<path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/>
+			</svg>
+		</button>
+
+		<button class="ctrl-btn play-btn" id="btn-play-pause" aria-label="Reproducir o pausar">
+			<svg id="icon-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+				<path d="M8 5v14l11-7z"/>
+			</svg>
+			<svg id="icon-pause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="display: none;">
+				<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+			</svg>
+		</button>
+
+		<button class="ctrl-btn secondary-btn" id="btn-mute" aria-label="Silenciar" title="Silenciar">
+			<svg id="icon-volume" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+				<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+			</svg>
+			<svg id="icon-muted" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="display: none;">
+				<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27l4.73 4.73H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/>
+			</svg>
+		</button>
+	</div>
+
+	<!-- Progress bar & timer -->
+	<div class="progress-wrapper">
+		<span class="time-display" id="current-time">0:00</span>
+		<div class="progress-bar-container" id="progress-container">
+			<div class="progress-bar-fill" id="progress-fill"></div>
+		</div>
+		<span class="time-display" id="total-duration">--:--</span>
+	</div>
+
+	<!-- Animated sound waves -->
+	<div class="equalizer" id="equalizer">
+		<span class="bar bar-1"></span>
+		<span class="bar bar-2"></span>
+		<span class="bar bar-3"></span>
+		<span class="bar bar-4"></span>
+		<span class="bar bar-5"></span>
+		<span class="bar bar-6"></span>
+		<span class="bar bar-7"></span>
+	</div>
+</div>
+
+<!-- Floating Play/Pause Pill strictly static in the bottom-right corner -->
+<button class="floating-music-btn" id="floating-music-btn" aria-label="Control de música flotante" title="Música">
+	<div class="floating-icon">
+		<svg id="float-play-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+			<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+		</svg>
+		<svg id="float-pause-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display: none;">
+			<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+		</svg>
+	</div>
+	<span class="floating-text">Música</span>
+</button>
+
+<style>
+	.audio-player-wrapper {
+		margin: 24px auto 18px;
+		max-width: 320px;
+		background: rgba(255, 255, 255, 0.88);
+		border: 1px solid rgba(246, 185, 19, 0.45);
+		border-radius: 20px;
+		padding: 18px 20px 14px;
+		text-align: center;
+		box-shadow: 0 8px 25px rgba(200, 164, 200, 0.18), 0 2px 10px rgba(246, 185, 19, 0.12);
+		backdrop-filter: blur(8px);
+		position: relative;
+		z-index: 4;
+	}
+
+	.player-header {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		margin-bottom: 4px;
+	}
+
+	.music-note {
+		color: var(--c-gold);
+		font-size: 14px;
+		animation: noteFloat 2s ease-in-out infinite alternate;
+	}
+
+	.dale-play {
+		font-family: var(--font-serif);
+		font-size: 13px;
+		letter-spacing: 3px;
+		font-weight: 600;
+		color: var(--c-gold-dark);
+		text-transform: uppercase;
+		margin: 0;
+	}
+
+	.song-title {
+		font-family: var(--font-serif);
+		font-size: 14px;
+		font-weight: 600;
+		color: var(--c-text-title);
+		margin: 4px 0 2px;
+	}
+
+	.song-artist {
+		font-size: 11px;
+		color: var(--c-text-light);
+		margin-bottom: 14px;
+		letter-spacing: 0.5px;
+	}
+
+	.controls-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 16px;
+		margin-bottom: 12px;
+	}
+
+	.ctrl-btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.25s ease;
+		color: var(--c-text-title);
+	}
+
+	.secondary-btn {
+		width: 34px;
+		height: 34px;
+		border-radius: 50%;
+		background: rgba(200, 164, 200, 0.25);
+		color: var(--c-text-body);
+	}
+
+	.secondary-btn:hover {
+		background: rgba(186, 217, 245, 0.5);
+		transform: scale(1.08);
+	}
+
+	.play-btn {
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		background: var(--gold-gradient);
+		color: #ffffff;
+		box-shadow: 0 4px 15px rgba(246, 185, 19, 0.45);
+	}
+
+	.play-btn:hover {
+		transform: scale(1.08);
+		box-shadow: 0 6px 20px rgba(246, 185, 19, 0.6);
+	}
+
+	.play-btn:active {
+		transform: scale(0.96);
+	}
+
+	.progress-wrapper {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-size: 10px;
+		color: var(--c-text-light);
+		margin-bottom: 8px;
+	}
+
+	.time-display {
+		min-width: 28px;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.progress-bar-container {
+		flex: 1;
+		height: 5px;
+		background: rgba(196, 199, 208, 0.4);
+		border-radius: 6px;
+		cursor: pointer;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.progress-bar-fill {
+		height: 100%;
+		width: 0%;
+		background: var(--gold-gradient);
+		border-radius: 6px;
+		transition: width 0.1s linear;
+	}
+
+	/* Equalizer animations */
+	.equalizer {
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		gap: 3px;
+		height: 14px;
+		opacity: 0.4;
+		transition: opacity 0.3s ease;
+	}
+
+	.equalizer.active {
+		opacity: 1;
+	}
+
+	.bar {
+		width: 3px;
+		background: var(--c-lilac);
+		border-radius: 2px;
+		height: 3px;
+		transition: height 0.2s ease;
+	}
+
+	.equalizer.active .bar {
+		animation: bounce 1.2s ease-in-out infinite alternate;
+	}
+
+	.equalizer.active .bar-1 { animation-delay: 0.1s; height: 10px; background: var(--c-blue); }
+	.equalizer.active .bar-2 { animation-delay: 0.3s; height: 14px; background: var(--c-lilac); }
+	.equalizer.active .bar-3 { animation-delay: 0.5s; height: 7px; background: var(--c-gold); }
+	.equalizer.active .bar-4 { animation-delay: 0.2s; height: 12px; background: var(--c-gold-warm); }
+	.equalizer.active .bar-5 { animation-delay: 0.4s; height: 8px; background: var(--c-lilac); }
+	.equalizer.active .bar-6 { animation-delay: 0.6s; height: 13px; background: var(--c-blue); }
+	.equalizer.active .bar-7 { animation-delay: 0.25s; height: 6px; background: var(--c-gold); }
+
+	@keyframes bounce {
+		0% { height: 3px; }
+		100% { height: 14px; }
+	}
+
+	@keyframes noteFloat {
+		0% { transform: translateY(0) rotate(-6deg); }
+		100% { transform: translateY(-3px) rotate(6deg); }
+	}
+
+	/* Floating button: strictly fixed at the bottom right corner */
+	.floating-music-btn {
+		position: fixed !important;
+		bottom: 24px !important;
+		right: 20px !important;
+		z-index: 999999 !important;
+		background: #ffffff !important;
+		border: 1.5px solid var(--c-gold) !important;
+		border-radius: 30px !important;
+		padding: 8px 16px !important;
+		display: flex !important;
+		align-items: center !important;
+		gap: 6px !important;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 0 12px rgba(246, 185, 19, 0.3) !important;
+		color: var(--c-text-title) !important;
+		font-size: 12px !important;
+		font-weight: 700 !important;
+		cursor: pointer !important;
+		transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+	}
+
+	.floating-music-btn:hover {
+		transform: scale(1.06) !important;
+		box-shadow: 0 6px 24px rgba(246, 185, 19, 0.5) !important;
+	}
+
+	.floating-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--c-gold-dark);
+	}
+
+	.floating-music-btn.playing {
+		border-color: var(--c-gold) !important;
+		box-shadow: 0 4px 20px rgba(246, 185, 19, 0.5) !important;
+	}
+
+	.floating-music-btn.playing .floating-icon {
+		animation: pulse 1.6s infinite ease-in-out;
+	}
+
+	@keyframes pulse {
+		0%, 100% { transform: scale(1); }
+		50% { transform: scale(1.18); }
+	}
+</style>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const audio = document.getElementById('quince-audio') as HTMLAudioElement;
+		const playBtn = document.getElementById('btn-play-pause');
+		const iconPlay = document.getElementById('icon-play');
+		const iconPause = document.getElementById('icon-pause');
+		const restartBtn = document.getElementById('btn-restart');
+		const muteBtn = document.getElementById('btn-mute');
+		const iconVol = document.getElementById('icon-volume');
+		const iconMuted = document.getElementById('icon-muted');
+		const progressContainer = document.getElementById('progress-container');
+		const progressFill = document.getElementById('progress-fill');
+		const currentTimeEl = document.getElementById('current-time');
+		const totalDurationEl = document.getElementById('total-duration');
+		const equalizer = document.getElementById('equalizer');
+
+		const floatingBtn = document.getElementById('floating-music-btn');
+		const floatPlayIcon = document.getElementById('float-play-icon');
+		const floatPauseIcon = document.getElementById('float-pause-icon');
+
+		// Ensure floatingBtn is attached directly to document.body so no CSS transforms can move it!
+		if (floatingBtn && floatingBtn.parentElement !== document.body) {
+			document.body.appendChild(floatingBtn);
+		}
+
+		if (!audio) return;
+
+		const formatTime = (seconds: number) => {
+			if (isNaN(seconds)) return '0:00';
+			const min = Math.floor(seconds / 60);
+			const sec = Math.floor(seconds % 60);
+			return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+		};
+
+		const updatePlayState = (isPlaying: boolean) => {
+			if (isPlaying) {
+				if (iconPlay) iconPlay.style.display = 'none';
+				if (iconPause) iconPause.style.display = 'block';
+				if (floatPlayIcon) floatPlayIcon.style.display = 'none';
+				if (floatPauseIcon) floatPauseIcon.style.display = 'block';
+				if (equalizer) equalizer.classList.add('active');
+				if (floatingBtn) floatingBtn.classList.add('playing');
+			} else {
+				if (iconPlay) iconPlay.style.display = 'block';
+				if (iconPause) iconPause.style.display = 'none';
+				if (floatPlayIcon) floatPlayIcon.style.display = 'block';
+				if (floatPauseIcon) floatPauseIcon.style.display = 'none';
+				if (equalizer) equalizer.classList.remove('active');
+				if (floatingBtn) floatingBtn.classList.remove('playing');
+			}
+		};
+
+		const togglePlay = () => {
+			if (audio.paused) {
+				audio.play().then(() => updatePlayState(true)).catch(console.error);
+			} else {
+				audio.pause();
+				updatePlayState(false);
+			}
+		};
+
+		playBtn?.addEventListener('click', togglePlay);
+		floatingBtn?.addEventListener('click', togglePlay);
+
+		restartBtn?.addEventListener('click', () => {
+			audio.currentTime = 0;
+			if (audio.paused) {
+				audio.play().then(() => updatePlayState(true)).catch(console.error);
+			}
+		});
+
+		muteBtn?.addEventListener('click', () => {
+			audio.muted = !audio.muted;
+			if (audio.muted) {
+				if (iconVol) iconVol.style.display = 'none';
+				if (iconMuted) iconMuted.style.display = 'block';
+			} else {
+				if (iconVol) iconVol.style.display = 'block';
+				if (iconMuted) iconMuted.style.display = 'none';
+			}
+		});
+
+		audio.addEventListener('loadedmetadata', () => {
+			if (totalDurationEl) totalDurationEl.textContent = formatTime(audio.duration);
+		});
+
+		audio.addEventListener('timeupdate', () => {
+			if (currentTimeEl) currentTimeEl.textContent = formatTime(audio.currentTime);
+			if (audio.duration && progressFill) {
+				const pct = (audio.currentTime / audio.duration) * 100;
+				progressFill.style.width = `${pct}%`;
+			}
+		});
+
+		audio.addEventListener('ended', () => {
+			updatePlayState(false);
+			if (progressFill) progressFill.style.width = '0%';
+		});
+
+		progressContainer?.addEventListener('click', (e) => {
+			const rect = progressContainer.getBoundingClientRect();
+			const clickX = e.clientX - rect.left;
+			const width = rect.width;
+			if (audio.duration) {
+				audio.currentTime = (clickX / width) * audio.duration;
+			}
+		});
+
+		const startOnInteraction = () => {
+			if (audio.paused) {
+				audio.play().then(() => {
+					updatePlayState(true);
+				}).catch(() => {});
+			}
+			document.removeEventListener('click', startOnInteraction);
+		};
+		document.addEventListener('click', startOnInteraction, { once: true });
+	});
+</script>
