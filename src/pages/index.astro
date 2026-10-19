@@ -39,7 +39,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 				<div class="arch-frame-outer parallax-element" data-speed="-0.06">
 					<div class="arch-frame-inner">
 						<img
-							src={`${base}/img/img_quince_001.jpeg`}
+							src={`${base}/img/1001307716.jpg`}
 							alt="Claudia - Quinceañera"
 							class="arch-photo"
 							loading="eager"
@@ -151,7 +151,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 				<div class="seamless-img-wrapper parallax-element" data-speed="-0.07">
 					<img
-						src={`${base}/img/img_quince_002.webp`}
+						src={`${base}/img/1001307719.jpg`}
 						alt="Claudia en sus 15 años"
 						class="photo-seamless"
 						loading="lazy"
@@ -181,7 +181,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 				<div class="photo-banner-frame parallax-element" data-speed="-0.06">
 					<img
-						src={`${base}/img/img_quince_003.jpeg`}
+						src={`${base}/img/1001307722.jpg`}
 						alt="Claudia - Sesión de fotos"
 						class="photo-banner-img"
 						loading="lazy"
@@ -216,7 +216,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 				<div class="farewell-frame-outer parallax-element" data-speed="-0.05">
 					<div class="farewell-frame-inner">
 						<img
-							src={`${base}/img/img_quince_004.jpeg`}
+							src={`${base}/img/1001307725.jpg`}
 							alt="Claudia en sus 15 años"
 							class="farewell-photo"
 							loading="lazy"
@@ -426,7 +426,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 	/* Quote */
 	.quote-container {
 		max-width: 320px;
-		margin: 16px auto 10px;
+		margin: 40px auto 16px;
 		text-align: center;
 		padding: 0 10px;
 		position: relative;
@@ -655,19 +655,22 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		box-shadow: 0 6px 18px rgba(246, 185, 19, 0.55);
 	}
 
-	/* SECTION 2: PHOTO ABOVE ITINERARY (PNG WITHOUT FRAME) */
+	/* SECTION 2: PHOTO ABOVE ITINERARY */
 	.section-photo-seamless {
 		position: relative;
 		width: 100%;
+		padding: 16px 18px;
 		margin: 10px 0 0;
-		padding: 0;
 		line-height: 0;
-		overflow: visible;
+		box-sizing: border-box;
 	}
 
 	.seamless-img-wrapper {
 		width: 100%;
-		background: transparent;
+		border-radius: 18px;
+		overflow: hidden;
+		box-shadow: 0 10px 25px rgba(110, 80, 50, 0.1);
+		background: #ffffff;
 		line-height: 0;
 		position: relative;
 		z-index: 3;
@@ -677,7 +680,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		width: 100%;
 		height: auto;
 		display: block;
-		background: transparent;
 	}
 
 	/* SECTION 3: ITINERARY (NO ROSE ADORNMENTS) */
